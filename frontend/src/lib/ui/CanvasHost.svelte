@@ -1,10 +1,23 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Application, Graphics } from "pixi.js";
-  import { Camera } from "../Camera";
+  import { Application } from "pixi.js";
+  import { Camera } from "../scene/Camera";
   import { Background } from "../scene/Background";
+  import { ShipLayer } from "../scene/ShipLayer";
+  import { world } from "../state/world.svelte";
 
   let host: HTMLDivElement;
+  let ships: ShipLayer | null = null;
+
+  $effect(() => {
+    const s = world.state;
+    ships?.sync(s);
+  });
+
+  $effect(() => {
+    const sel = world.selectedId;
+    ships?.setSelected(sel);
+  });
 
   onMount(() => {
     const app = new Application();
@@ -27,7 +40,6 @@
         "wheel",
         (e) => {
           e.preventDefault();
-          // di sini nanti: zoom kanvas
         },
         { passive: false },
       );
@@ -36,13 +48,20 @@
       camera.onChange = () => bg.redraw();
       app.renderer.on("resize", () => bg.redraw());
       bg.redraw();
-
-      const box = new Graphics().rect(-40, -40, 80, 80).fill(0xe0b04a);
-      camera.world.addChild(box);
+      camera.onTap = () => {
+        world.selectedId = null;
+      };
+      ships = new ShipLayer(camera.world, app.stage, (id) => {
+        world.selectedId = id;
+      });
+      ships.sync(world.state);
+      ships.setSelected(world.selectedId);
     })();
 
     return () => {
       destroyed = true;
+      ships?.destroy();
+      ships = null;
       camera?.destroy();
       if (app.renderer) app.destroy(true, { children: true });
     };

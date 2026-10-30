@@ -25,14 +25,23 @@ export class Camera {
     app.canvas.addEventListener("wheel", this.onWheel, { passive: false });
   }
 
+  onTap: (() => void) | null = null;
+  private downAt = new Point();
+  private moved = false;
+
   private onDown = (e: FederatedPointerEvent) => {
     this.dragging = true;
+    this.moved = false;
+    this.downAt.copyFrom(e.global);
     this.last.copyFrom(e.global);
     this.app.canvas.style.cursor = "grabbing";
   };
 
   private onMove = (e: FederatedPointerEvent) => {
     if (!this.dragging) return;
+    if (!this.moved && Math.hypot(e.global.x - this.downAt.x, e.global.y - this.downAt.y) > 4) {
+      this.moved = true;
+    }
     this.world.x += e.global.x - this.last.x;
     this.world.y += e.global.y - this.last.y;
     this.last.copyFrom(e.global);
@@ -40,6 +49,7 @@ export class Camera {
   };
 
   private onUp = () => {
+    if (this.dragging && !this.moved) this.onTap?.();
     this.dragging = false;
     this.app.canvas.style.cursor = "grab";
   };
@@ -83,4 +93,5 @@ export class Camera {
     this.app.stage.off("pointerupoutside", this.onUp);
     this.app.canvas.removeEventListener("wheel", this.onWheel);
   }
+
 }

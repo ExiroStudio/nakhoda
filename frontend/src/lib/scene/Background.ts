@@ -1,5 +1,5 @@
 import { Graphics } from "pixi.js";
-import type { Camera } from "../Camera";
+import type { Camera } from "./Camera";
 
 export class Background {
   private g = new Graphics();
