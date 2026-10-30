@@ -1,0 +1,19 @@
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;            
+  overscroll-behavior: none;   
+}
+
+body {
+  background: #0b1d33;         
+}
+
+canvas {
+  display: block;              
+  touch-action: none;          
+}
