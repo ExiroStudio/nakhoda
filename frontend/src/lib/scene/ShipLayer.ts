@@ -1,6 +1,6 @@
 import type { Container as PixiContainer, FederatedPointerEvent } from "pixi.js";
 import type { WorldState } from "../state/reducer";
-import { Ship } from "./Ship";
+import { Ship, SHIP_W, SHIP_H } from "./Ship";
 
 const DRAG_THRESHOLD = 4; // piksel layar
 
@@ -35,6 +35,15 @@ export class ShipLayer {
         stage.on("pointerup", this.onUp);
         stage.on("pointerupoutside", this.onUp);
     }
+
+    tick(dtMs: number) {
+        for (const ship of this.ships.values()) ship.tick(dtMs);
+    }
+
+    anchorOf = (containerId: string) => {
+        const s = this.ships.get(containerId);
+        return s ? { x: s.x + SHIP_W / 2, y: s.y + SHIP_H / 2 } : null;
+    };
 
     setSelected(id: string | null) {
         this.selectedId = id;

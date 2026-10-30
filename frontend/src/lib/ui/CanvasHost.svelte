@@ -1,13 +1,16 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Application } from "pixi.js";
+  import { Application, type Ticker } from "pixi.js";
   import { Camera } from "../scene/Camera";
   import { Background } from "../scene/Background";
   import { ShipLayer } from "../scene/ShipLayer";
   import { world } from "../state/world.svelte";
+  import { NetworkLayer } from "../scene/NetworkLayer";
 
   let host: HTMLDivElement;
   let ships: ShipLayer | null = null;
+  let network: NetworkLayer | null = null;
+  let frame: ((t: Ticker) => void) | null = null;
 
   $effect(() => {
     const s = world.state;
@@ -51,17 +54,32 @@
       camera.onTap = () => {
         world.selectedId = null;
       };
+      network = new NetworkLayer();
+      camera.world.addChildAt(network.view, 1);
+
       ships = new ShipLayer(camera.world, app.stage, (id) => {
         world.selectedId = id;
       });
       ships.sync(world.state);
       ships.setSelected(world.selectedId);
+
+      const cam = camera;
+      const layer = ships;
+      const nets = network;
+      frame = (t) => {
+        layer.tick(t.deltaMS);
+        nets.redraw(world.state, layer.anchorOf, cam.world.scale.x);
+      };
+      app.ticker.add(frame);
     })();
 
     return () => {
       destroyed = true;
+      if (frame) app.ticker.remove(frame);
+      frame = null;
       ships?.destroy();
       ships = null;
+      network = null;
       camera?.destroy();
       if (app.renderer) app.destroy(true, { children: true });
     };
