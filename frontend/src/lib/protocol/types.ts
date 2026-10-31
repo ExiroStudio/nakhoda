@@ -1,6 +1,6 @@
 export type HostId = string;
 
-export type ContainerState = "running" | "exited" | "paused" | "restarting";
+export type ContainerState = "running" | "overload" |"exited" | "paused" | "restarting";
 
 export interface Container {
   id: string;

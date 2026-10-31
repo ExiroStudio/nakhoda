@@ -12,9 +12,9 @@ export function createMockSource(): DataSource {
         { id: "n2", name: "db-net" },
     ];
     const seed: Container[] = [
-        { id: "c1", name: "web", image: "nginx:alpine", state: "running", networks: ["n1"] },
-        { id: "c2", name: "api", image: "myapp/api:1.4", state: "running", networks: ["n1", "n2"] },
-        { id: "c3", name: "postgres", image: "postgres:16", state: "running", networks: ["n2"] },
+        { id: "c1", name: "web", image: "nginx:alpine", state: "restarting", networks: ["n1"] },
+        { id: "c2", name: "api", image: "myapp/api:1.4", state: "paused", networks: ["n1", "n2"] },
+        { id: "c3", name: "postgres", image: "postgres:16", state: "overload", networks: ["n2"] },
         { id: "c4", name: "redis", image: "redis:7", state: "running", networks: ["n1"] },
         { id: "c5", name: "worker", image: "myapp/worker:1.4", state: "running", networks: ["n1", "n2"] },
         { id: "c6", name: "grafana", image: "grafana/grafana", state: "running", networks: [] },
@@ -37,7 +37,7 @@ export function createMockSource(): DataSource {
         timer = setInterval(() => {
             tick++;
             for (const c of containers.values()) {
-                if (c.state !== "running") continue;
+                if (c.state !== "running" && c.state !== "overload") continue;
                 emit({
                     t: "stats",
                     host: HOST,

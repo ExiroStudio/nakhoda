@@ -57,7 +57,7 @@ export class ShipLayer {
                 ship = new Ship(id, this.onPress);
                 ship.setSelected(id === this.selectedId);
                 const i = this.ships.size;
-                ship.position.set((i % 3) * 220 - 330, Math.floor(i / 3) * 140 - 100);
+                ship.position.set((i % 3) * 220 - 330, Math.floor(i / 3) * 170 - 100);
                 this.world.addChild(ship);
                 this.ships.set(id, ship);
             }
