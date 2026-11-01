@@ -1,6 +1,6 @@
 export type HostId = string;
 
-export type ContainerState = "running" | "overload" |"exited" | "paused" | "restarting";
+export type ContainerState = "running" | "overload" | "exited" | "paused" | "restarting";
 
 export interface Container {
   id: string;
@@ -8,6 +8,12 @@ export interface Container {
   image: string;
   state: ContainerState;
   networks: string[]; // id network yang diikuti
+  /** Label com.docker.compose.project. Kosong untuk container hasil `docker run`. */
+  project?: string;
+  /** Label com.docker.compose.service. */
+  service?: string;
+  /** Label com.docker.compose.oneoff=True (hasil `docker compose run`, sifatnya sementara). */
+  oneoff?: boolean;
 }
 
 export interface Network {
@@ -16,7 +22,7 @@ export interface Network {
 }
 
 export interface Stats {
-  cpu: number;      // persen
+  cpu: number; // persen
   memBytes: number;
 }
 

@@ -1,11 +1,8 @@
 import { Container as PixiContainer, Graphics, Text } from "pixi.js";
 import type { WorldState } from "../state/reducer";
+import type { Anchor } from "./ShipLayer";
 import { hash, hslToHex } from "./util";
 
-interface Anchor {
-  x: number;
-  y: number;
-}
 type Resolver = (containerId: string) => Anchor | null;
 
 export class NetworkLayer {
@@ -20,23 +17,26 @@ export class NetworkLayer {
   redraw(state: WorldState, anchorOf: Resolver, zoom: number) {
     this.g.clear();
 
-    // kumpulkan titik kapal per network
-    const members = new Map<string, Anchor[]>();
+    // kapal anggota tiap network. Dideduplikasi per kapal: kapal kontainer dengan tiga
+    // container di network yang sama tetap hanya satu titik.
+    const members = new Map<string, Map<string, Anchor>>();
     for (const c of state.containers.values()) {
       if (c.state === "exited") continue; // container yang berhenti tidak terhubung ke network
       const a = anchorOf(c.id);
       if (!a) continue;
       for (const nid of c.networks) {
-        let list = members.get(nid);
-        if (!list) members.set(nid, (list = []));
-        list.push(a);
+        let m = members.get(nid);
+        if (!m) members.set(nid, (m = new Map()));
+        m.set(a.key, a);
       }
     }
 
     const visible = new Set<string>();
 
-    for (const [nid, pts] of members) {
-      if (pts.length < 2) continue; // satu anggota tidak menghubungkan apa pun
+    for (const [nid, byKey] of members) {
+      const pts = [...byKey.values()];
+      // network yang seluruh anggotanya ada di satu kapal (misalnya <project>_default) tidak digambar
+      if (pts.length < 2) continue;
 
       const color = hslToHex(hash(nid) % 360);
       let cx = 0;

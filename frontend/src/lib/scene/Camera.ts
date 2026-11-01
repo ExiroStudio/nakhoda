@@ -6,11 +6,17 @@ const MAX_ZOOM = 4;
 export class Camera {
   readonly world = new Container();
   onChange: (() => void) | null = null;
+  /** Dipanggil saat latar kosong diketuk (ditekan lalu dilepas tanpa bergeser). */
+  onTap: (() => void) | null = null;
 
+  private app: Application;
   private dragging = false;
+  private moved = false;
   private last = new Point();
+  private downAt = new Point();
 
-  constructor(private app: Application) {
+  constructor(app: Application) {
+    this.app = app;
     app.stage.addChild(this.world);
 
     // stage menangkap pointer di seluruh layar, jadi latar kosong bisa di-drag
@@ -25,9 +31,11 @@ export class Camera {
     app.canvas.addEventListener("wheel", this.onWheel, { passive: false });
   }
 
-  onTap: (() => void) | null = null;
-  private downAt = new Point();
-  private moved = false;
+  /** Menaruh titik asal dunia (0, 0) di tengah layar. */
+  centerOnOrigin() {
+    this.world.position.set(this.app.screen.width / 2, this.app.screen.height / 2);
+    this.onChange?.();
+  }
 
   private onDown = (e: FederatedPointerEvent) => {
     this.dragging = true;
@@ -67,10 +75,7 @@ export class Camera {
     const old = this.world.scale.x;
     const next = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, old * factor));
     const k = next / old;
-    this.world.position.set(
-      sx - (sx - this.world.x) * k,
-      sy - (sy - this.world.y) * k,
-    );
+    this.world.position.set(sx - (sx - this.world.x) * k, sy - (sy - this.world.y) * k);
     this.world.scale.set(next);
     this.onChange?.();
   }
@@ -93,5 +98,4 @@ export class Camera {
     this.app.stage.off("pointerupoutside", this.onUp);
     this.app.canvas.removeEventListener("wheel", this.onWheel);
   }
-
 }

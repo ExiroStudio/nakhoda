@@ -19,9 +19,7 @@ export interface ShipArt {
   width: number;
   height: number;
   shapes: Shape[];
-  /** Jumlah container yang tidak muat di ikon (hanya kapal kontainer). */
   overflow: number;
-  /** Posisi label "+N" (rata kanan), dalam koordinat ikon. */
   overflowAnchor: { x: number; y: number };
 }
 
