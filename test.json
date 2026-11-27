@@ -1,0 +1,1072 @@
+[
+    {
+        "Id": "d59c6311b1cc52d4c907574edf1aead6a2c06e3cc37130762aa4acafb42e9c96",
+        "Names": [
+            "/llama-qwen35-9b"
+        ],
+        "Image": "ghcr.io/ggml-org/llama.cpp:server",
+        "ImageID": "sha256:086942d6ac097c894d9d5bbaf8085c53af85e113fbb9d6d61b3748863c86aa5f",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:a0926b5d65de418f245259828f83e6c2b980a01444dbc824b7972ca4394a06f6",
+            "size": 1934,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/app/llama-server -hf bartowski/Qwen_Qwen3.5-9B-GGUF:Q4_K_M --host 0.0.0.0 --port 8080 --jinja -c 8192 -t 6 -np 1 --alias qwen3.5-9b",
+        "Created": 1794404566,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.config-hash": "5547d26c599f76ac654e1effc2fe2354ffff6a6e9c38583372d569573025904a",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:a0926b5d65de418f245259828f83e6c2b980a01444dbc824b7972ca4394a06f6",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "llama",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/llama/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/llama",
+            "com.docker.compose.service": "llama",
+            "com.docker.compose.version": "5.6.0",
+            "org.opencontainers.image.created": "2026-11-11T04:23:34Z",
+            "org.opencontainers.image.description": "LLM inference in C/C++",
+            "org.opencontainers.image.revision": "aa75ff3239f9cc675b081697deda9e1b112345c6",
+            "org.opencontainers.image.source": "https://github.com/ggml-org/llama.cpp",
+            "org.opencontainers.image.title": "llama.cpp",
+            "org.opencontainers.image.url": "https://github.com/ggml-org/llama.cpp",
+            "org.opencontainers.image.version": "b12282"
+        },
+        "State": "exited",
+        "Status": "Exited (0) 2 days ago",
+        "HostConfig": {
+            "NetworkMode": "llama_default"
+        },
+        "Health": {
+            "Status": "unhealthy",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "llama_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "06b709fd9b50ec8a376c3365d7b79d96b73e1002ca0e784b725d8669b111f2aa",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/llama/models",
+                "Destination": "/models",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "a1e493580a3cacb99bfa09f3a22a5efbc71e913e3e4cb958a5e1637a3d795250",
+        "Names": [
+            "/rustfs"
+        ],
+        "Image": "rustfs/rustfs:latest",
+        "ImageID": "sha256:ed9210d6411d77ffceb70d94b964a3cb7d225983368bc25bebe01e995293dcc2",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+            "size": 1811,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/entrypoint.sh /data",
+        "Created": 1793794251,
+        "Ports": [],
+        "Labels": {
+            "build-date": "",
+            "com.docker.compose.config-hash": "7677fa0999cf40c6e31c7e4c6806bd0fd6afc3bb00c886277797397d6253779d",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:e287e99762a4a3e7b706526e01f2ff755f67db165e9be9f6b907adc6fb6d6ee1",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "rustfs",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/WRI/rustfs/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/WRI/rustfs",
+            "com.docker.compose.service": "rustfs",
+            "com.docker.compose.version": "5.6.0",
+            "description": "RustFS is a distributed object storage system written in Rust, supporting erasure coding, multi-tenant management, and observability.",
+            "license": "Apache-2.0",
+            "maintainer": "RustFS Team <dev@rustfs.com>",
+            "name": "RustFS",
+            "org.opencontainers.image.title": "RustFS,org.opencontainers.image.description=RustFS distributed object storage system,org.opencontainers.image.version=1.0.4,org.opencontainers.image.revision=46337942d55f3a8e6a97b147ca98d9ea8115555d,org.opencontainers.image.source=https://github.com/rustfs/rustfs,org.opencontainers.image.created=2026-10-25T16:27:49Z,org.opencontainers.image.build-type=release",
+            "release": "1.0.4",
+            "summary": "High-performance distributed object storage system compatible with S3 API",
+            "url": "https://rustfs.com",
+            "vcs-ref": "",
+            "vendor": "RustFS Team",
+            "version": "v1.0.4"
+        },
+        "State": "exited",
+        "Status": "Exited (0) 12 days ago",
+        "HostConfig": {
+            "NetworkMode": "rustfs_default"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "rustfs_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "3c1b6c437024813b7b097d3e900f6c6aadbf66a1a757e4c468d4f6431c9b9986",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/WRI/rustfs/data",
+                "Destination": "/data",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/WRI/rustfs/logs",
+                "Destination": "/app/logs",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "1b64267724aedf95a6eef3614a453e779ec40ee6816f77615adda153fb7b0fc3",
+        "Names": [
+            "/php-dev"
+        ],
+        "Image": "php-cli:latest",
+        "ImageID": "sha256:bfa29c6b1c8616cbba9cc8df2b5c2ec2ed0e7a9fc619b172715a312f5a1698fd",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:ce4f9852f553ee88d83437c4c1329159594cbc5bc226fdc8a5ffdfadc5f7514e",
+            "size": 2952,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "docker-php-entrypoint tail -f /dev/null",
+        "Created": 1793423614,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.project": "laravel",
+            "com.docker.compose.service": "app",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "exited",
+        "Status": "Exited (137) 2 days ago",
+        "HostConfig": {
+            "NetworkMode": "host"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "host": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "933ec72e50ddf0682c9cf70225d8caec04bf8a5a5e3e168eccb7bd62d75f9c71",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/tmp",
+                "Destination": "/tmp",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/exiro",
+                "Destination": "/home/exiro",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "5e6c7d17c1e935269603983550b70aab67b1366beba9ffc2713578409a0f1e6a",
+        "Names": [
+            "/app-ku"
+        ],
+        "Image": "app-sederhana:1.0",
+        "ImageID": "sha256:c484db2f4907898c1fe3aba07ce4dd299cfd3a9b7478809530b552828f43ef2d",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:5da1f5d7ecf9357a552e29a241dbc008704806c95ae9e5d00b4f8f3c142e6725",
+            "size": 1809,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "docker-entrypoint.sh node server.js",
+        "Created": 1793195010,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (137) 2 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "bridge"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "e2dd34c6104a4ebe7620e6fa01d2905f9a0faae6a03bd2f881cda415e20f20c5",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "a5684e6a622b142ca2e86977d18d601d839ff9ce1d7f9bdc5f4daa3bc899c1c0",
+        "Names": [
+            "/distracted_pascal"
+        ],
+        "Image": "hello-world",
+        "ImageID": "sha256:c567b231f65614688711a75f31518a064258a51d442117a3e771a3a8fdba78ef",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:d1a8d0a4eeb63aff09f5f34d4d80505e0ba81905f36158cc3970d8e07179e59e",
+            "size": 1023,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.name": "scratch",
+                "org.opencontainers.image.created": "2026-03-23T21:33:57Z",
+                "org.opencontainers.image.revision": "0b0efba82b82ace81ab2fb42d25116f9488e6cb4",
+                "org.opencontainers.image.source": "https://github.com/docker-library/hello-world.git#0b0efba82b82ace81ab2fb42d25116f9488e6cb4:amd64",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/hello-world",
+                "org.opencontainers.image.version": "linux"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/hello",
+        "Created": 1793191953,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (0) 2 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "bridge"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "e2dd34c6104a4ebe7620e6fa01d2905f9a0faae6a03bd2f881cda415e20f20c5",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "46971442af527ac1438bf5d254731a37d9f4dd97fca59c3ec1c77e5b586001ac",
+        "Names": [
+            "/pensive_mayer"
+        ],
+        "Image": "hello-world",
+        "ImageID": "sha256:c567b231f65614688711a75f31518a064258a51d442117a3e771a3a8fdba78ef",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:d1a8d0a4eeb63aff09f5f34d4d80505e0ba81905f36158cc3970d8e07179e59e",
+            "size": 1023,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.name": "scratch",
+                "org.opencontainers.image.created": "2026-03-23T21:33:57Z",
+                "org.opencontainers.image.revision": "0b0efba82b82ace81ab2fb42d25116f9488e6cb4",
+                "org.opencontainers.image.source": "https://github.com/docker-library/hello-world.git#0b0efba82b82ace81ab2fb42d25116f9488e6cb4:amd64",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/hello-world",
+                "org.opencontainers.image.version": "linux"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/hello",
+        "Created": 1793191869,
+        "Ports": [],
+        "Labels": {},
+        "State": "exited",
+        "Status": "Exited (0) 2 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "bridge"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "e2dd34c6104a4ebe7620e6fa01d2905f9a0faae6a03bd2f881cda415e20f20c5",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "e1122edb47516663112626fcc579ce8fd35876d321b3bf6ac889ae0a87d071ad",
+        "Names": [
+            "/ecstatic_montalcini"
+        ],
+        "Image": "hello-world",
+        "ImageID": "sha256:c567b231f65614688711a75f31518a064258a51d442117a3e771a3a8fdba78ef",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:d1a8d0a4eeb63aff09f5f34d4d80505e0ba81905f36158cc3970d8e07179e59e",
+            "size": 1023,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.name": "scratch",
+                "org.opencontainers.image.created": "2026-03-23T21:33:57Z",
+                "org.opencontainers.image.revision": "0b0efba82b82ace81ab2fb42d25116f9488e6cb4",
+                "org.opencontainers.image.source": "https://github.com/docker-library/hello-world.git#0b0efba82b82ace81ab2fb42d25116f9488e6cb4:amd64",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/hello-world",
+                "org.opencontainers.image.version": "linux"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "-d",
+        "Created": 1793191865,
+        "Ports": [],
+        "Labels": {},
+        "State": "created",
+        "Status": "Created",
+        "HostConfig": {
+            "NetworkMode": "bridge"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": []
+    },
+    {
+        "Id": "5b3dcd786c3eb3aaed371745a8d8bb6e2c44b7ac753021f7b4bf217bed0152f5",
+        "Names": [
+            "/php2shell-python-1"
+        ],
+        "Image": "python:latest",
+        "ImageID": "sha256:20fe87d3bb1974b1c4e14d426b399b0e7209d8bbf3b6cae3ff51e09ddd490e73",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:2e13bb9164213e8dec5adf78bc63bb710054c4b656800e29a25f756ed2fa18ae",
+            "size": 2318,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.digest": "sha256:5ddb4ca0c05a2746b1c7b711751532b6673e604444a948ff4aed493bfee4a896",
+                "org.opencontainers.image.base.name": "buildpack-deps:trixie",
+                "org.opencontainers.image.created": "2026-10-21T22:18:55Z",
+                "org.opencontainers.image.revision": "5da18d3627f545dda6dac7908004db5193f694d7",
+                "org.opencontainers.image.source": "https://github.com/docker-library/python.git#5da18d3627f545dda6dac7908004db5193f694d7:3.15/trixie",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/python",
+                "org.opencontainers.image.version": "3.15.1-trixie"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "tail -f /dev/null",
+        "Created": 1792627539,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.config-hash": "23799b396be33b2f3218a92ecf65748c7f83cd7df1f08411c1c604bb741896d4",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:2e13bb9164213e8dec5adf78bc63bb710054c4b656800e29a25f756ed2fa18ae",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "php2shell",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/php2shell/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/php2shell",
+            "com.docker.compose.replace": "python-1",
+            "com.docker.compose.service": "python",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "exited",
+        "Status": "Exited (137) 3 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "php2shell_default"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "php2shell_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "f5666461249d77a694a187269447ccedeba0fd3bbf5eb32878b576c6226c37cc",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/php2shell/src",
+                "Destination": "/workspace",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "cd6c945596445d401917e634f2e7150cdcdbc7a0aee390f6ff328702fb53977f",
+        "Names": [
+            "/laravel-app-1"
+        ],
+        "Image": "laravel-app",
+        "ImageID": "sha256:bfa29c6b1c8616cbba9cc8df2b5c2ec2ed0e7a9fc619b172715a312f5a1698fd",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:ce4f9852f553ee88d83437c4c1329159594cbc5bc226fdc8a5ffdfadc5f7514e",
+            "size": 2952,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "docker-php-entrypoint tail -f /dev/null",
+        "Created": 1792584495,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.config-hash": "578c38ff444dd740b18a4f5097edc52262b4d03d817b6b64de241aca164c3f10",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:ce4f9852f553ee88d83437c4c1329159594cbc5bc226fdc8a5ffdfadc5f7514e",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "laravel",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/WRI/laravel/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/WRI/laravel",
+            "com.docker.compose.service": "app",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "exited",
+        "Status": "Exited (137) 3 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "host"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "host": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "933ec72e50ddf0682c9cf70225d8caec04bf8a5a5e3e168eccb7bd62d75f9c71",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/WRI/laravel/src",
+                "Destination": "/app",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "972b1f256ce290ca19b77c8aebc89eb88f292828dfe130fb7442a53a96f51510",
+        "Names": [
+            "/composer-composer-1"
+        ],
+        "Image": "composer:latest",
+        "ImageID": "sha256:af98f42dfff7c68ba8d53c2164fd9fde1087b7d449514baa38c418b1f6bc4bac",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:bdd249749908be12facc9dec72e19704371bb893f96dff3e024ec89528a5a08d",
+            "size": 3609,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.digest": "sha256:6527fa5ae0609f30a5ae5c0f66c76ba353aaf1e81d10ec1511a029855f0a5c3f",
+                "org.opencontainers.image.base.name": "php:8-alpine",
+                "org.opencontainers.image.created": "2026-09-24T19:28:58Z",
+                "org.opencontainers.image.revision": "a23788a1b4f65ad2dd090c3ee2a7ad9e35a7d9d1",
+                "org.opencontainers.image.source": "https://github.com/composer/docker.git#a23788a1b4f65ad2dd090c3ee2a7ad9e35a7d9d1:latest",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/composer",
+                "org.opencontainers.image.version": "2.10.3"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/docker-entrypoint.sh composer",
+        "Created": 1792576848,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.config-hash": "c39f8d64b642a883500084547186be3eb65394370afc44b6b3729036affdd078",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:bdd249749908be12facc9dec72e19704371bb893f96dff3e024ec89528a5a08d",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "composer",
+            "com.docker.compose.project.config_files": "/home/exiro/Docker/composer/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Docker/composer",
+            "com.docker.compose.service": "composer",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "exited",
+        "Status": "Exited (0) 3 weeks ago",
+        "HostConfig": {
+            "NetworkMode": "composer_default"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "composer_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "477abdbc50b4005811d5ccb9bebf3e5e7bac9d47855f9395a482e6f3175d853a",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Docker/composer",
+                "Destination": "/app",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ]
+    },
+    {
+        "Id": "d6a794812eff2b03084f414134e212dc166f7873271a628028cb485f24f0fbe2",
+        "Names": [
+            "/kopkarpay-dev-redis"
+        ],
+        "Image": "redis:7-alpine",
+        "ImageID": "sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:ca0acbb137c1dc3339c8b147a58fd6f42775d4599327b50e7b116c23de501af2",
+            "size": 2288,
+            "annotations": {
+                "com.docker.official-images.bashbrew.arch": "amd64",
+                "org.opencontainers.image.base.digest": "sha256:3c81aa9a3d770b316568f4499e30461a5cd3fbd7180bd89e28e34894c7845832",
+                "org.opencontainers.image.base.name": "alpine:3.21",
+                "org.opencontainers.image.created": "2026-09-17T21:32:00Z",
+                "org.opencontainers.image.revision": "74654c612ee06275377d483dc4e134e57b463e9e",
+                "org.opencontainers.image.source": "https://github.com/redis/docker-library-redis.git#74654c612ee06275377d483dc4e134e57b463e9e:alpine",
+                "org.opencontainers.image.url": "https://hub.docker.com/_/redis",
+                "org.opencontainers.image.version": "7.4.11-alpine"
+            },
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "docker-entrypoint.sh redis-server",
+        "Created": 1792221464,
+        "Ports": [
+            {
+                "IP": "0.0.0.0",
+                "PrivatePort": 6379,
+                "PublicPort": 6379,
+                "Type": "tcp"
+            },
+            {
+                "IP": "::",
+                "PrivatePort": 6379,
+                "PublicPort": 6379,
+                "Type": "tcp"
+            }
+        ],
+        "Labels": {
+            "com.docker.compose.config-hash": "50371421d9bf01523a5fae809a92da98e262393daa85fc692c4b03a50ac98eae",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:ca0acbb137c1dc3339c8b147a58fd6f42775d4599327b50e7b116c23de501af2",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "kopkarpay-dev",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/kopkarpay/migration/kopkarpay-web/docker/compose.dev.yaml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/kopkarpay/migration/kopkarpay-web/docker",
+            "com.docker.compose.service": "redis",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "running",
+        "Status": "Up 8 hours (healthy)",
+        "HostConfig": {
+            "NetworkMode": "kopkarpay-dev_default"
+        },
+        "Health": {
+            "Status": "healthy",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "kopkarpay-dev_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "a60c918b58a33feccf8d9eba40da5d41f7e9a225fc28e8c758df678b9f5bb7ba",
+                    "EndpointID": "ec29f711d1ccb81fff59db43762ef66a6ea93965609a7f58c1b04b7bef94ea4b",
+                    "Gateway": "172.21.0.1",
+                    "IPAddress": "172.21.0.2",
+                    "MacAddress": "16:d7:70:6a:91:14",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "kopkarpay-dev_redis_data",
+                "Source": "/var/lib/docker/volumes/kopkarpay-dev_redis_data/_data",
+                "Destination": "/data",
+                "Driver": "local",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": ""
+            }
+        ]
+    },
+    {
+        "Id": "6b586acbff62a7ebdc720cce06c4b1d8201b1fcda4597139697f5dee5527a388",
+        "Names": [
+            "/pkl-local-storage"
+        ],
+        "Image": "public.ecr.aws/supabase/storage-api:v1.62.5",
+        "ImageID": "sha256:1dbe962d9862ef12e20357f9d7ba5431989c1daf4a556d6cb20ee4efd1c57320",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:28f8a3cc5dd81b1b13098ca12460883ecb911d017a371b4b5efcb3ec432c1f1e",
+            "size": 2770,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/bin/sh -c 'node -e '\nconst fs = require(\"fs\");\ntry {\n  let code = fs.readFileSync(\"/app/dist/app.js\", \"utf8\");\n  const target = \"done(null);\\n  });\";\n  if (!code.includes(\"Access-Control-Allow-Origin\")) {\n    const hook = `done(null);\n  });\n  app.addHook(\"onRequest\", async (request, reply) => {\n    const origin = request.headers.origin || \"*\";\n    reply.header(\"Access-Control-Allow-Origin\", origin);\n    reply.header(\"Access-Control-Allow-Methods\", \"GET, HEAD, PUT, POST, DELETE, PATCH, OPTIONS\");\n    reply.header(\"Access-Control-Allow-Headers\", \"*\");\n    reply.header(\"Access-Control-Expose-Headers\", \"*\");\n    reply.header(\"Access-Control-Allow-Credentials\", \"true\");\n    if (request.method === \"OPTIONS\") {\n      return reply.status(204).send();\n    }\n  });`;\n    fs.writeFileSync(\"/app/dist/app.js\", code.replace(target, hook));\n    console.log(\"✅ [Storage] Injected CORS preflight & headers into Fastify app\");\n  }\n} catch (e) {\n  console.error(\"⚠️ [Storage] Could not inject CORS:\", e);\n}\n'\nexec node dist/start/server.js\n'",
+        "Created": 1792155447,
+        "Ports": [
+            {
+                "IP": "0.0.0.0",
+                "PrivatePort": 5000,
+                "PublicPort": 54326,
+                "Type": "tcp"
+            },
+            {
+                "IP": "::",
+                "PrivatePort": 5000,
+                "PublicPort": 54326,
+                "Type": "tcp"
+            }
+        ],
+        "Labels": {
+            "com.docker.compose.config-hash": "8d63c1b40bbc2aa6da64e40e5fa3cb35fb7295ee554cc0c46d796869101b4442",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "pkl-db:service_healthy:false",
+            "com.docker.compose.image": "sha256:28f8a3cc5dd81b1b13098ca12460883ecb911d017a371b4b5efcb3ec432c1f1e",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "pkl-golang-be",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/PKL/pkl-golang-be/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/PKL/pkl-golang-be",
+            "com.docker.compose.replace": "pkl-local-storage",
+            "com.docker.compose.service": "pkl-storage",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "running",
+        "Status": "Up 8 hours",
+        "HostConfig": {
+            "NetworkMode": "pkl-golang-be_default"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "pkl-golang-be_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "cd2883dd4eeafd4f6fa5d8be5ef220cce02d73c6f5a7956f76aeb86d83d4bc74",
+                    "EndpointID": "d9fee6aae5a2e8095eb109c7969173d5f6dfb20b618f024258a8ae99598ad7da",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.2",
+                    "MacAddress": "06:f8:6f:df:55:e8",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "pkl-golang-be_pkl_storage_data",
+                "Source": "/var/lib/docker/volumes/pkl-golang-be_pkl_storage_data/_data",
+                "Destination": "/var/lib/storage",
+                "Driver": "local",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": ""
+            }
+        ]
+    },
+    {
+        "Id": "4c13c1ce4729701a39c8d603844b3445170a17fa0a8a7aa2db339e5277834c03",
+        "Names": [
+            "/pkl-local-postgres"
+        ],
+        "Image": "public.ecr.aws/supabase/postgres:17.6.1.143",
+        "ImageID": "sha256:80d7b27c3e8d77cfa7226eee9508671796da214781ff15a35b3670d7ad5ee453",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:b021e96054128399f84f24e39d29c21ee7c7169515e5d9e4e99ff15d5043d1d8",
+            "size": 5775,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "docker-entrypoint.sh postgres -D /etc/postgresql",
+        "Created": 1792155031,
+        "Ports": [
+            {
+                "IP": "0.0.0.0",
+                "PrivatePort": 5432,
+                "PublicPort": 54325,
+                "Type": "tcp"
+            },
+            {
+                "IP": "::",
+                "PrivatePort": 5432,
+                "PublicPort": 54325,
+                "Type": "tcp"
+            }
+        ],
+        "Labels": {
+            "com.docker.compose.config-hash": "d88e832b992edef654636b8250d3d2054bd57073224a2ee7b92c23600ed87f96",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:b021e96054128399f84f24e39d29c21ee7c7169515e5d9e4e99ff15d5043d1d8",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "pkl-golang-be",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/PKL/pkl-golang-be/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/PKL/pkl-golang-be",
+            "com.docker.compose.service": "pkl-db",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "running",
+        "Status": "Up 8 hours (healthy)",
+        "HostConfig": {
+            "NetworkMode": "pkl-golang-be_default"
+        },
+        "Health": {
+            "Status": "healthy",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "pkl-golang-be_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "cd2883dd4eeafd4f6fa5d8be5ef220cce02d73c6f5a7956f76aeb86d83d4bc74",
+                    "EndpointID": "e36be0108db78a6d245c3cd0bb1599d7e5fead3bd8222c4c62f18e9d6cf832b6",
+                    "Gateway": "172.19.0.1",
+                    "IPAddress": "172.19.0.3",
+                    "MacAddress": "e2:00:66:d2:40:24",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "pkl-golang-be_pkl_postgres_data",
+                "Source": "/var/lib/docker/volumes/pkl-golang-be_pkl_postgres_data/_data",
+                "Destination": "/var/lib/postgresql/data",
+                "Driver": "local",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": ""
+            }
+        ]
+    },
+    {
+        "Id": "10e2ac27078334456b45cb8bfade866b6313584a6842cfef461d953b0396024a",
+        "Names": [
+            "/java-dev"
+        ],
+        "Image": "java-java",
+        "ImageID": "sha256:a368569d3f389078b490b065b9470d94fba2d20cb2ad3250bd8ded68a5863b03",
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:79c0b5ad5162e33662e5e66dfb537310eb4a68ec702f142d7fb28075289a6949",
+            "size": 1999,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        },
+        "Command": "/__cacert_entrypoint.sh sleep infinity",
+        "Created": 1792127608,
+        "Ports": [],
+        "Labels": {
+            "com.docker.compose.config-hash": "efde82a618fb0c9b53638bedfc1da53c58d258cee2d0b3a6884eb8c55dfd4751",
+            "com.docker.compose.container-number": "1",
+            "com.docker.compose.depends_on": "",
+            "com.docker.compose.image": "sha256:79c0b5ad5162e33662e5e66dfb537310eb4a68ec702f142d7fb28075289a6949",
+            "com.docker.compose.oneoff": "False",
+            "com.docker.compose.project": "java",
+            "com.docker.compose.project.config_files": "/home/exiro/Workspace/java/docker-compose.yml",
+            "com.docker.compose.project.working_dir": "/home/exiro/Workspace/java",
+            "com.docker.compose.service": "java",
+            "com.docker.compose.version": "5.6.0"
+        },
+        "State": "exited",
+        "Status": "Exited (137) 4 days ago",
+        "HostConfig": {
+            "NetworkMode": "java_default"
+        },
+        "Health": {
+            "Status": "none",
+            "FailingStreak": 0
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "java_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "c11d5033857b65558911577e8944e6dae29a17fac07e02f4de7b8c609dc93be7",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/exiro/Workspace/java",
+                "Destination": "/workspace",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "java_maven-cache",
+                "Source": "/var/lib/docker/volumes/java_maven-cache/_data",
+                "Destination": "/home/dev/.m2",
+                "Driver": "local",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": ""
+            }
+        ]
+    }
+]
