@@ -25,6 +25,18 @@ export abstract class VesselView extends PixiContainer {
   });
   private readonly info = new Text({ text: "", style: { fill: 0xcfe3ff, fontSize: 12 } });
   private pop = 0; // denyut singkat saat jumlah muatan berubah
+  private face = 1; // arah hadap saat ini, 1 = kanan, -1 = kiri; berubah halus lewat 0 saat berbalik
+  private faceTo = 1;
+
+  /** Ikon digambar menghadap kanan. Berbalik dengan memutar badan, label tidak ikut terbalik. */
+  setFacing(f: 1 | -1) {
+    this.faceTo = f;
+  }
+
+  /** Boleh berlayar: container berjalan dan belum mulai tenggelam. */
+  get underway() {
+    return this.float.underway;
+  }
 
   /** Ukuran ikon dalam koordinat dunia. Diisi oleh layout(). */
   iconW = 0;
@@ -101,6 +113,10 @@ export abstract class VesselView extends PixiContainer {
 
     this.pop *= Math.exp(-dtMs / 180);
     if (this.pop > 0.001) this.body.scale.set(this.body.scale.x * (1 + 0.06 * this.pop));
+
+    // berbalik arah: lebar badan menyempit lewat nol lalu melebar ke sisi sebaliknya
+    this.face += (this.faceTo - this.face) * (1 - Math.exp(-dtMs / 140));
+    this.body.scale.x *= this.face;
 
     // teks tetap di tempat tapi meredup saat kapalnya tenggelam
     this.title.alpha = this.info.alpha = 1 - this.float.depth * 0.4;
