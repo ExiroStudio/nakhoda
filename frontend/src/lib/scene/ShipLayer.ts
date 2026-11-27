@@ -7,8 +7,16 @@ import type { WorldState } from "../state/reducer";
 import { membersOf, type Vessel } from "../state/vessels";
 import { CargoShip } from "./CargoShip";
 import { Ship } from "./Ship";
+import { hash } from "./util";
+import { Wander, mulberry32 } from "./Wander";
 
 const DRAG_THRESHOLD = 4; // piksel layar
+
+// Area jelajah kapal di sekitar titik asalnya: elips yang melebar mengikuti lebar kapal.
+// Perahu kecil hanya bergeser sedikit, kapal kontainer menjelajah lebih luas.
+const ROAM_MIN_RX = 36;
+const ROAM_RX_PER_WIDTH = 0.25;
+const ROAM_RY_RATIO = 0.4;
 
 // penempatan awal kapal baru: grid dengan sel selebar kapal kontainer terbesar
 const CELL_W = 380;
@@ -26,6 +34,9 @@ export interface Anchor {
 /**
  * Satu slot per kapal. Slot memegang posisi, area klik, dan drag. View di dalamnya
  * (perahu atau kapal kontainer) boleh diganti kapan saja tanpa menghilangkan posisi.
+ *
+ * Posisi kapal di layar = home + wander. `home` adalah titik asal yang diubah oleh drag,
+ * `wander` adalah selisih kecil hasil berkeliaran di sekitarnya.
  */
 interface Slot {
   key: string;
@@ -33,6 +44,8 @@ interface Slot {
   root: PixiContainer;
   hit: Rectangle;
   view: Ship | CargoShip;
+  home: { x: number; y: number };
+  wander: Wander;
 }
 
 interface DragState {
@@ -91,7 +104,17 @@ export class ShipLayer {
   }
 
   tick(dtMs: number) {
-    for (const slot of this.slots.values()) slot.view.tick(dtMs);
+    for (const slot of this.slots.values()) {
+      slot.view.tick(dtMs);
+
+      // Selama ditekan atau diseret, kapal ikut tangan dan tidak berkeliaran.
+      if (this.drag?.slot === slot) continue;
+
+      const rx = Math.max(ROAM_MIN_RX, slot.view.iconW * ROAM_RX_PER_WIDTH);
+      slot.wander.tick(dtMs, slot.view.underway, rx, rx * ROAM_RY_RATIO);
+      slot.root.position.set(slot.home.x + slot.wander.x, slot.home.y + slot.wander.y);
+      slot.view.setFacing(slot.wander.facing);
+    }
   }
 
   /** Dari container ke kapalnya. Satu-satunya tempat yang tahu pemetaan ini, dipakai NetworkLayer. */
@@ -119,17 +142,20 @@ export class ShipLayer {
     root.cursor = "grab";
 
     const i = this.spawned++;
-    root.position.set(
-      ORIGIN_X + (i % 3) * CELL_W,
-      ORIGIN_Y + Math.floor(i / 3) * CELL_H,
-    );
+    const home = {
+      x: ORIGIN_X + (i % 3) * CELL_W,
+      y: ORIGIN_Y + Math.floor(i / 3) * CELL_H,
+    };
+    root.position.set(home.x, home.y);
 
     const view = this.createView(v);
     view.setSelected(v.key === this.selectedKey);
     root.addChild(view);
     this.world.addChild(root);
 
-    const slot: Slot = { key: v.key, kind: v.kind, root, hit, view };
+    // seed dari kunci kapal: gerak tiap kapal berbeda, tapi tetap sama saat bentuknya berganti
+    const wander = new Wander(mulberry32(hash(v.key)));
+    const slot: Slot = { key: v.key, kind: v.kind, root, hit, view, home, wander };
     root.on("pointerdown", (e) => {
       e.stopPropagation(); // supaya kamera tidak ikut tergeser
       this.onPress(slot, e);
@@ -168,6 +194,11 @@ export class ShipLayer {
     this.onSelect(slot.key);
     this.world.addChild(slot.root); // naik ke paling atas supaya tidak tertutup kapal lain
 
+    // titik asal pindah ke tempat kapal berada sekarang, supaya tidak ada lompatan saat dipegang
+    slot.home.x = slot.root.x;
+    slot.home.y = slot.root.y;
+    slot.wander.reset();
+
     const p = this.world.toLocal(e.global);
     this.drag = {
       slot,
@@ -192,7 +223,9 @@ export class ShipLayer {
     }
 
     const p = this.world.toLocal(e.global);
-    d.slot.root.position.set(p.x + d.dx, p.y + d.dy);
+    d.slot.home.x = p.x + d.dx;
+    d.slot.home.y = p.y + d.dy;
+    d.slot.root.position.set(d.slot.home.x, d.slot.home.y);
   };
 
   private onUp = (e: FederatedPointerEvent) => {

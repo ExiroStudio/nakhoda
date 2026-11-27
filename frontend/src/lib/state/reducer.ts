@@ -13,7 +13,7 @@ export const emptyState = (): WorldState => ({
 });
 
 export function reduce(s: WorldState, e: WorldEvent): WorldState {
-    switch (e.t) {
+    switch (e.type) {
         case "snapshot":
             return {
                 containers: new Map(e.containers.map((c) => [c.id, c])),

@@ -43,6 +43,11 @@ export class Buoyancy {
     return this.sink;
   }
 
+  /** Hanya kapal yang berjalan yang berlayar. Yang dijeda, mati, atau sedang tenggelam diam di tempat. */
+  get underway() {
+    return this.state === "running" || this.state === "restarting";
+  }
+
   /** Menggerakkan `body`, yang pivot-nya harus di titik tengah ikon (cx, cy). */
   tick(dtMs: number, body: PixiContainer, cx: number, cy: number, h: number) {
     // interpolasi yang tidak bergantung frame rate

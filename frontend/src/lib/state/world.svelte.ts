@@ -21,7 +21,6 @@ class World {
   apply(e: WorldEvent) {
     this.state = reduce(this.state, e);
 
-    // lepas pilihan yang sudah tidak ada lagi
     if (this.selectedKey) {
       const v = this.vessels.find((x) => x.key === this.selectedKey);
       if (!v) {

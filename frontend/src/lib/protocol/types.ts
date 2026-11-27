@@ -27,13 +27,13 @@ export interface Stats {
 }
 
 export type WorldEvent =
-  | { t: "snapshot"; host: HostId; containers: Container[]; networks: Network[] }
-  | { t: "container.started"; host: HostId; container: Container }
-  | { t: "container.died"; host: HostId; id: string }
-  | { t: "container.removed"; host: HostId; id: string }
-  | { t: "network.connected"; host: HostId; networkId: string; containerId: string }
-  | { t: "network.disconnected"; host: HostId; networkId: string; containerId: string }
-  | { t: "stats"; host: HostId; id: string; cpu: number; memBytes: number };
+  | { type: "snapshot"; host: HostId; containers: Container[]; networks: Network[] }
+  | { type: "container.started"; host: HostId; container: Container }
+  | { type: "container.died"; host: HostId; id: string }
+  | { type: "container.removed"; host: HostId; id: string }
+  | { type: "network.connected"; host: HostId; networkId: string; containerId: string }
+  | { type: "network.disconnected"; host: HostId; networkId: string; containerId: string }
+  | { type: "stats"; host: HostId; id: string; cpu: number; memBytes: number };
 
 export type Intent =
   | { t: "start" | "stop" | "restart"; host: HostId; id: string }
